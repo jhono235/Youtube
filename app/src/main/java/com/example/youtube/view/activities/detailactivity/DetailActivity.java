@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -16,8 +15,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.example.youtube.model.datasource.remote.retrofit.UrlConstants.API_KEY;
 
 public class DetailActivity extends AppCompatActivity implements DetailActivityContract {
     DetailActivityPresenter detailActivityPresenter;
@@ -37,9 +34,7 @@ public class DetailActivity extends AppCompatActivity implements DetailActivityC
     ImageView ivBanner;
 
     @BindView(R.id.ivDetailThumbnail)
-            ImageView ivDetailThimbnail;
-
-
+    ImageView ivDetailThimbnail;
 
 
     //Channel id passed from RecyclerView to retrieve channel details
@@ -47,8 +42,6 @@ public class DetailActivity extends AppCompatActivity implements DetailActivityC
 
     //part requested for youtube api
     String part = "brandingSettings,snippet,statistics";
-
-
 
 
     @Override
@@ -64,20 +57,18 @@ public class DetailActivity extends AppCompatActivity implements DetailActivityC
         passedId = intent.getStringExtra("passedId");
 
 
-
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        detailActivityPresenter.getUser(part,passedId,API_KEY);
+        detailActivityPresenter.getUser(part, passedId);
 
     }
 
 
-//points to list item indexed at zero for details for channel
+    //points to list item indexed at zero for details for channel
     @Override
     public void onAdapterReady(List<Item> item) {
         //populates values for subcriber count, view count, and video count
@@ -85,26 +76,19 @@ public class DetailActivity extends AppCompatActivity implements DetailActivityC
         tvVideoCount.setText(item.get(0).getStatistics().getVideoCount());
         tvViewCount.setText(item.get(0).getStatistics().getViewCount());
 
-       //gets banner image
+        //gets banner image
         Glide
-              .with(this)
-              .load(item.get(0).getBrandingSettings().getImage().getBannerMobileExtraHdImageUrl())
-              .into(ivBanner);
+                .with(this)
+                .load(item.get(0).getBrandingSettings().getImage().getBannerMobileExtraHdImageUrl())
+                .into(ivBanner);
 
         //gets channel thumbnail
-       Glide
-               .with(this)
-               .load(item.get(0).getSnippet().getThumbnails().getHigh().getUrl())
-               .into(ivDetailThimbnail);
+        Glide
+                .with(this)
+                .load(item.get(0).getSnippet().getThumbnails().getHigh().getUrl())
+                .into(ivDetailThimbnail);
 
-       DetailActivity.this.getSupportActionBar().setTitle(item.get(0).getSnippet().getTitle());
-
-
-
-
-
-
-
+        DetailActivity.this.getSupportActionBar().setTitle(item.get(0).getSnippet().getTitle());
 
 
     }

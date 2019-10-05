@@ -14,8 +14,6 @@ import com.example.youtube.view.adapters.MainActivityRvAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.youtube.model.datasource.remote.retrofit.UrlConstants.API_KEY;
-
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract {
     @BindView(R.id.etSearchUser)
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     public void onClick(View view){
         final String userRequested = etUserSearch.getText().toString();
         //part,maxResults,order,userRequested,type,API_KEY
-        mainActivityPresenter.getUserInfo(part,maxResults,order,userRequested,type,API_KEY);
+        mainActivityPresenter.getUserInfo(userRequested);
 
 
 

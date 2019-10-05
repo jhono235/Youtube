@@ -17,8 +17,8 @@ import com.example.youtube.view.activities.detailactivity.DetailActivity;
 
 import java.util.List;
 
-public class MainActivityRvAdapter extends RecyclerView.Adapter<MainActivityRvAdapter.ViewHolder> {
-    List<Item> userListResults;
+public class MainActivityRvAdapter extends RecyclerView.Adapter<MainActivityRvAdapter.ViewHolderInternal> {
+    private List<Item> userListResults;
 
     public MainActivityRvAdapter(List<Item> userListResults){
         this.userListResults = userListResults;
@@ -26,14 +26,14 @@ public class MainActivityRvAdapter extends RecyclerView.Adapter<MainActivityRvAd
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater
+    public ViewHolderInternal onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolderInternal(LayoutInflater
                 .from(parent.getContext())
         .inflate(R.layout.user_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolderInternal holder, int position) {
         Item currentItem = userListResults.get(position);
         holder.tvChannelName.setText(currentItem.getSnippet().getTitle());
         holder.tvDescription.setText(currentItem.getSnippet().getDescription());
@@ -58,13 +58,13 @@ public class MainActivityRvAdapter extends RecyclerView.Adapter<MainActivityRvAd
         return userListResults.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolderInternal extends RecyclerView.ViewHolder {
         TextView tvChannelName;
         TextView tvDescription;
         ImageView ivThumbnail;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolderInternal(@NonNull View itemView) {
             super(itemView);
 
             tvChannelName = itemView.findViewById(R.id.tvChannelName);
@@ -75,7 +75,6 @@ public class MainActivityRvAdapter extends RecyclerView.Adapter<MainActivityRvAd
                     new View.OnClickListener(){
                         @Override
                         public void onClick(View view) {
-                            //Toast.makeText(view.getContext(), userListResults.get(getAdapterPosition()).getSnippet().getChannelId(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(view.getContext(), DetailActivity.class);
                             intent.putExtra("passedId", userListResults.get(getAdapterPosition()).getSnippet().getChannelId());
                             view.getContext().startActivity(intent);

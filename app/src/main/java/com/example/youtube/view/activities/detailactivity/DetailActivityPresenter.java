@@ -13,22 +13,24 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class DetailActivityPresenter {
-    DetailActivityContract contract;
+import static com.example.youtube.model.datasource.remote.retrofit.UrlConstants.API_KEY;
+
+class DetailActivityPresenter {
+    private DetailActivityContract contract;
 
 
-    public DetailActivityPresenter(DetailActivityContract contract) {
+    DetailActivityPresenter(DetailActivityContract contract) {
         this.contract = contract;
 
     }
 
     //
-    public void getUser(String part, String channelId, String key) {
+    void getUser(String part, String channelId) {
         RetrofitHelper retrofitHelper = new RetrofitHelper();
 
         retrofitHelper.getSearchService()
                 //
-                .getUser(part, channelId, key)
+                .getUser(part, channelId, API_KEY)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Results>() {
@@ -56,7 +58,7 @@ public class DetailActivityPresenter {
                 });
     }
 
-    public void setUpAdapter(Results results) {
+    private void setUpAdapter(Results results) {
 
         contract.onAdapterReady(results.getItems());
     }

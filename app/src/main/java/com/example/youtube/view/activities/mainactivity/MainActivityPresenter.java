@@ -12,20 +12,26 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivityPresenter {
+import static com.example.youtube.model.datasource.remote.retrofit.UrlConstants.API_KEY;
+import static com.example.youtube.view.activities.mainactivity.MainActivity.maxResults;
+import static com.example.youtube.view.activities.mainactivity.MainActivity.order;
+import static com.example.youtube.view.activities.mainactivity.MainActivity.part;
+import static com.example.youtube.view.activities.mainactivity.MainActivity.type;
 
-    MainActivityContract contract;
+class MainActivityPresenter {
 
-    public MainActivityPresenter(MainActivityContract contract) {
+    private MainActivityContract contract;
+
+    MainActivityPresenter(MainActivityContract contract) {
         this.contract = contract;
     }
 
     //String part, String maxResults, String order, String term, String type, String key
-    public void getUserInfo(String part, String maxResults, String order, String term, String type, String key) {
+    void getUserInfo(String term) {
         RetrofitHelper retrofitHelper = new RetrofitHelper();
         retrofitHelper.getSearchService()
                 //part, maxResults, order, term, type, key
-                .getUserList(part, maxResults, order, term, type, key)
+                .getUserList(part, maxResults, order, term, type, API_KEY)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<UserListResults>() {
@@ -54,7 +60,7 @@ public class MainActivityPresenter {
                 });
     }
 
-                    public void setUpAdapter(UserListResults userListResults) {
+                    private void setUpAdapter(UserListResults userListResults) {
         MainActivityRvAdapter mainActivityRvAdapter = new MainActivityRvAdapter(userListResults.getItems());
         contract.onAdapterReady(mainActivityRvAdapter);
     }
