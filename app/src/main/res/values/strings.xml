@@ -2,4 +2,8 @@
     <string name="app_name">Youtube</string>
     <string name="search">Search</string>
     <string name="search_for_a_channel">Search For a Channel</string>
+    <string name="subscriber_count">subscriber count</string>
+    <string name="subscribers">Subscribers</string>
+    <string name="views">Views</string>
+    <string name="videos">Videos</string>
 </resources>

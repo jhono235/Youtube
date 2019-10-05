@@ -1,33 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activities.mainactivity.MainActivity"
-    android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvUserList"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+    >
 
 
     <EditText
         android:id="@+id/etSearchUser"
+        android:layout_width="324dp"
+        android:layout_height="47dp"
         android:hint="@string/search_for_a_channel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:singleLine="true"
+        app:layout_constraintEnd_toStartOf="@+id/btnSearch"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
+    <ImageView
         android:id="@+id/btnSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onClick"
+        android:src="@android:drawable/ic_menu_search"
         android:text="@string/search"
-        android:onClick="onClick"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUserList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:visibility="visible"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSearchUser"
+
+        />
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

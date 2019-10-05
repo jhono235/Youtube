@@ -1,8 +1,5 @@
 package com.example.youtube.model.datasource.remote.retrofit;
 
-import com.google.api.services.youtube.YouTube;
-
-//?part=snippet&maxResults=10&order=relevance&q=pewdiepie&type=channel&key=[YOUR_API_KEY]
 
 import static com.google.api.services.youtube.YouTube.DEFAULT_BASE_URL;
 

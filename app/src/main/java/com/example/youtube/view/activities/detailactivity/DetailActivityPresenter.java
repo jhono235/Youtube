@@ -3,8 +3,10 @@ package com.example.youtube.view.activities.detailactivity;
 import android.util.Log;
 
 import com.example.youtube.model.datasource.remote.retrofit.RetrofitHelper;
-import com.example.youtube.model.results.Item;
+
 import com.example.youtube.model.results.Results;
+
+
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -14,8 +16,10 @@ import io.reactivex.schedulers.Schedulers;
 public class DetailActivityPresenter {
     DetailActivityContract contract;
 
+
     public DetailActivityPresenter(DetailActivityContract contract) {
         this.contract = contract;
+
     }
 
     //
@@ -27,8 +31,8 @@ public class DetailActivityPresenter {
                 .getUser(part, channelId, key)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Item>() {
-                    private Item item;
+                .subscribe(new Observer<Results>() {
+                    private Results results;
 
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -36,8 +40,8 @@ public class DetailActivityPresenter {
                     }
 
                     @Override
-                    public void onNext(Item item) {
-                        this.item = item;
+                    public void onNext(Results results) {
+                        this.results = results;
                     }
 
                     @Override
@@ -47,8 +51,13 @@ public class DetailActivityPresenter {
 
                     @Override
                     public void onComplete() {
-                        contract.onAdapterReady(item);
+                        setUpAdapter(results);
                     }
                 });
+    }
+
+    public void setUpAdapter(Results results) {
+
+        contract.onAdapterReady(results.getItems());
     }
 }

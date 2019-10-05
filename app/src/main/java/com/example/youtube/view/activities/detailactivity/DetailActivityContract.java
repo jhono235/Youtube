@@ -1,8 +1,10 @@
 package com.example.youtube.view.activities.detailactivity;
 
 import com.example.youtube.model.results.Item;
-import com.example.youtube.model.results.Results;
+
+
+import java.util.List;
 
 public interface DetailActivityContract {
-    void onAdapterReady(Item item);
+    void onAdapterReady(List<Item> item);
 }

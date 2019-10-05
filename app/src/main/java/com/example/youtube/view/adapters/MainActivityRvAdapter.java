@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.youtube.R;
 import com.example.youtube.model.listResults.Item;
-import com.example.youtube.model.listResults.UserListResults;
 import com.example.youtube.view.activities.detailactivity.DetailActivity;
 
 import java.util.List;
